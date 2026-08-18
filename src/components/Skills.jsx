@@ -33,7 +33,7 @@ const Skills = () => {
   return (
     <section
       id="skills"
-      className="w-full bg-[#e5e5e5] px-6 py-20 text-center text-black sm:px-10 md:px-20 md:py-28"
+      className="scroll-mt-20 w-full bg-[#e5e5e5] px-6 py-20 text-center text-black sm:px-10 md:px-20 md:py-28"
     >
       <SectionLabel>SKILLS</SectionLabel>
 

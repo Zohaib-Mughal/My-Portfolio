@@ -7,7 +7,7 @@ const About = () => {
   return (
     <section
       id="about"
-      className="w-full bg-[#e5e5e5] px-6 py-20 text-center text-black sm:px-10 md:px-20 md:py-28"
+      className="scroll-mt-20 w-full bg-[#e5e5e5] px-6 py-20 text-center text-black sm:px-10 md:px-20 md:py-28"
     >
       <div className="mx-auto max-w-2xl">
         <SectionLabel>ABOUT ME</SectionLabel>

@@ -92,7 +92,7 @@ const Portfolio = () => {
       : PROJECTS.filter(p => p.category === activeFilter.toLowerCase());
 
   return (
-    <section id="projects" className="w-full bg-black text-white">
+    <section id="projects" className="scroll-mt-20 w-full bg-black text-white">
       <div className="px-6 py-16 text-center sm:px-10 md:px-20">
         <SectionLabel>PORTFOLIO</SectionLabel>
       </div>

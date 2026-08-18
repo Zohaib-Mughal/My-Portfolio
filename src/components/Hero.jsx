@@ -40,7 +40,7 @@ const Hero = () => {
         <img
           src={heroImg}
           alt="Zohaib Munir"
-          className="h-full w-full object-cover object-center md:h-full md:object-cover"
+          className="h-full w-full object-cover object-center md:h-full md:object-cover mt-20"
         />
       </section>
 
@@ -72,44 +72,43 @@ const Hero = () => {
 
         {/* Social icons — mirrors the Figma's icon row under the name */}
         <div className="mt-2 flex items-center gap-3">
-  <a
-    href={SOCIAL_LINKS.email}
-    aria-label="Email"
-    className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 md:bg-black/10 md:text-black md:hover:bg-black/20"
-  >
-    <FaEnvelope size={16} />
-  </a>
-  <a
-    href={SOCIAL_LINKS.github}
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="GitHub"
-    className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 md:bg-black/10 md:text-black md:hover:bg-black/20"
-  >
-    <FaGithub size={16} />
-  </a>
-  <a
-    href={SOCIAL_LINKS.linkedin}
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="LinkedIn"
-    className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 md:bg-black/10 md:text-black md:hover:bg-black/20"
-  >
-    <FaLinkedin size={16} />
-  </a>
-  <a
-   href={SOCIAL_LINKS.whatsapp}
-  target="_blank"
-  rel="noopener noreferrer"
-  aria-label="WhatsApp"
-  className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 md:bg-black/10 md:text-black md:hover:bg-black/20"
->
-  <FaWhatsapp size={16} />
-</a>
-</div>
-
-      </section>
-    </header>
+        <a
+          href={SOCIAL_LINKS.email}
+          aria-label="Email"
+          className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 md:bg-black/10 md:text-black md:hover:bg-black/20"
+        >
+          <FaEnvelope size={16} />
+        </a>
+        <a
+          href={SOCIAL_LINKS.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="GitHub"
+          className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 md:bg-black/10 md:text-black md:hover:bg-black/20"
+        >
+          <FaGithub size={16} />
+        </a>
+        <a
+          href={SOCIAL_LINKS.linkedin}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="LinkedIn"
+          className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 md:bg-black/10 md:text-black md:hover:bg-black/20"
+        >
+          <FaLinkedin size={16} />
+        </a>
+        <a
+        href={SOCIAL_LINKS.whatsapp}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="WhatsApp"
+        className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 md:bg-black/10 md:text-black md:hover:bg-black/20"
+      >
+        <FaWhatsapp size={16} />
+      </a>
+      </div>
+        </section>
+        </header>
   );
 };
 

@@ -1,9 +1,10 @@
 import { useState, useRef, useEffect } from 'react';
+import logo from '../../public/favicon.svg';
 
 const NAV_LINKS = [
   { id: 1, name: 'About me', href: '#about' },
   { id: 2, name: 'Skills', href: '#skills' },
-  { id: 3, name: 'Projets', href: '#projects' },
+  { id: 3, name: 'Projects', href: '#projects' },
 ];
 
 function Navbar() {
@@ -36,7 +37,7 @@ function Navbar() {
         transition-colors duration-300 md:px-20
         ${scrolled ? 'bg-black shadow-lg' : 'bg-transparent'}`}
     >
-      <a href="#" className="text-xl font-bold">ZM</a>
+      <img src={logo} alt="Logo" className="h-8 w-8" />
 
       <section className="hidden items-center space-x-10 md:flex">
         {NAV_LINKS.map(link => (
