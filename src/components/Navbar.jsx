@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 
   const NAV_LINKS = [
   { id: 1, name: 'About me', href: '#about' },
@@ -11,10 +11,10 @@ function Navbar() {
   
     
   return (  
-    <nav className="flex justify-between items-center p-4 bg-transparent text-black px-20">
+    <nav className="flex justify-between items-center absolute top-0 z-10 w-full p-4 bg-transparent text-white px-20">
 
       <section className="logo">
-        <h2 className="text-xl font-bold">ZM</h2>
+        <h2 className="text-xl font-bold text-black">ZM</h2>
       </section>
 
       <section className="links space-x-10 hidden md:flex" >
@@ -23,7 +23,7 @@ function Navbar() {
             {link.name}
           </a>
         ))}
-        <a href="#contact" className="bg-black text-white rounded-4xl px-2 item-center p-1" >
+        <a href="#contact" className="bg-white text-black rounded-4xl px-2 item-center p-1" >
           Contact me
         </a>
       </section>
