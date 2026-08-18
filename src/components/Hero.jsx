@@ -33,6 +33,7 @@ const Hero = () => {
   return (
     <header
       className="relative flex min-h-dvh w-full flex-col overflow-hidden bg-black
+      bg-[linear-gradient(170deg,black_60%,#e5e5e5_5%)]
         md:flex-row md:bg-[linear-gradient(105deg,#e5e5e5_50%,black_50%)]"
     >
       {/* Photo — full-bleed on mobile (behind glass overlay), right half on desktop */}
@@ -40,7 +41,7 @@ const Hero = () => {
         <img
           src={heroImg}
           alt="Zohaib Munir"
-          className="h-full w-full object-cover object-center md:h-full md:object-cover mt-20"
+          className="h-full w-100 object-cover object-center md:h-full md:object-cover mt-20"
         />
       </section>
 
@@ -52,10 +53,11 @@ const Hero = () => {
 
       {/* Text block — bottom-anchored over the glass on mobile, left panel on desktop */}
       <section
-        className="absolute inset-x-0 bottom-0 z-20 flex flex-col items-start gap-4 px-6 pb-10
+        className="absolute inset-x-0 bottom-0 z-20 flex flex-row justify-between items-center gap-4 px-6 pb-10
           sm:px-8 sm:pb-14
           md:static md:w-1/2 md:order-1 md:h-auto md:justify-center md:px-16 md:pb-0 md:text-black"
       >
+        <div>
         <p className="text-base text-gray-300 md:text-gray-600">Hi, I am</p>
 
         <h1 className="text-3xl font-bold text-white sm:text-4xl md:text-5xl md:text-black lg:text-6xl">
@@ -69,9 +71,9 @@ const Hero = () => {
         >
           {HERO_TITLES[currentTitleIndex]}
         </h2>
-
+        </div>
         {/* Social icons — mirrors the Figma's icon row under the name */}
-        <div className="mt-2 flex items-center gap-3">
+        <div className="mt-2 flex flex-col items-center gap-3">
         <a
           href={SOCIAL_LINKS.email}
           aria-label="Email"

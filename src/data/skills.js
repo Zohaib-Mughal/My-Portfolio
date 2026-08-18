@@ -8,6 +8,18 @@ import mongodb from '../assets/icons/skills/mongodb.svg';
 import tailwind from '../assets/icons/skills/tailwindcss.svg';
 import git from '../assets/icons/skills/git.svg';
 import restapi from '../assets/icons/skills/rest-api-icon.svg';
+import typescript from '../assets/icons/skills/typescript.svg';
+import socketio from '../assets/icons/skills/socketio.svg';
+import postgresql from '../assets/icons/skills/postgresql.svg';
+import python from '../assets/icons/skills/python.svg';
+import supabase from '../assets/icons/skills/supabase.svg';
+import csharp from '../assets/icons/skills/csharp.svg';
+import java from '../assets/icons/skills/java.svg';
+import cpp from '../assets/icons/skills/cpp.svg';
+import dsa from '../assets/icons/skills/dsa.svg';
+import oop from '../assets/icons/skills/oop.svg';
+import postman from '../assets/icons/skills/postman.svg';
+import vscode from '../assets/icons/skills/vscode.svg';
 
 export const SKILLS_USING_NOW = [
   { id: 1, name: 'JavaScript', icon: javascript },
@@ -24,19 +36,19 @@ export const SKILLS_USING_NOW = [
 ];
 
 export const SKILLS_LEARNING = [
-  { id: 1, name: 'TypeScript', icon: null },
-  { id: 2, name: 'Socket.io', icon: null },
-  { id: 3, name: 'PostgreSQL', icon: null },
-  { id: 4, name: 'Python', icon: null },
-  { id: 5, name: 'Supabase', icon: null },
+  { id: 1, name: 'TypeScript', icon: typescript },
+  { id: 2, name: 'Socket.io', icon: socketio },
+  { id: 3, name: 'PostgreSQL', icon: postgresql },
+  { id: 4, name: 'Python', icon: python },
+  { id: 5, name: 'Supabase', icon: supabase },
 ];
 
 export const SKILLS_OTHER = [
-  { id: 1, name: 'C#', icon: null },
-  { id: 2, name: 'Java', icon: null },
-  { id: 3, name: 'C++', icon: null },
-  { id: 4, name: 'Data Structures & Algorithms', icon: null },
-  { id: 5, name: 'OOP', icon: null },
-  { id: 6, name: 'Postman', icon: null },
-  { id: 7, name: 'VS Code', icon: null },
+  { id: 1, name: 'C#', icon: csharp },
+  { id: 2, name: 'Java', icon: java },
+  { id: 3, name: 'C++', icon: cpp },
+  { id: 4, name: 'Data Structures & Algorithms', icon: dsa },
+  { id: 5, name: 'OOP', icon: oop },
+  { id: 6, name: 'Postman', icon: postman },
+  { id: 7, name: 'VS Code', icon: vscode },
 ];
