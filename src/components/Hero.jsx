@@ -1,83 +1,105 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
+import heroImg from '../assets/images/hero.png';
+import { SOCIAL_LINKS } from '../data/social';
 
 const HERO_TITLES = [
-  "Software Engineer",
-  "Full-Stack Developer",
-  "MERN Stack Specialist",
-  "React & Node Developer"
+  'Full-Stack Developer',
+  'React.js Developer',
+  'MERN Stack Specialist',
+  'React Native Developer',
 ];
 
 const Hero = () => {
   const [currentTitleIndex, setCurrentTitleIndex] = useState(0);
-  const [fade, setFade] = useState(true); 
+  const [fade, setFade] = useState(true);
 
   useEffect(() => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
     const interval = setInterval(() => {
       setFade(false);
-      setTimeout(() => {
-        setCurrentTitleIndex(prevIndex => (prevIndex + 1) % HERO_TITLES.length);
+      const timeout = setTimeout(() => {
+        setCurrentTitleIndex(prev => (prev + 1) % HERO_TITLES.length);
         setFade(true);
-      }, 500); 
+      }, 500);
+      return () => clearTimeout(timeout);
     }, 3000);
 
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div>
-      {/* 
-        ✅ THE BACKGROUND CONTAINER
-        Mobile: 160deg linear gradient (Bottom-Left to Mid-Right split).
-        Desktop: 105deg linear gradient (70% top white, 60% bottom white).
-      */}
-      <main className="relative flex min-h-screen w-full flex-col items-center justify-end overflow-hidden px-5 pb-16 
-        bg-[linear-gradient(160deg,white_60%,black_60%)] 
-        md:flex-row md:justify-center md:pb-0 
-        md:bg-[linear-gradient(105deg,white_50%,black_50%)]">
-        
-        {/* 
-          ✅ MOBILE GLASS EFFECT (Between Image and Text)
-          Fades from solid black at the bottom to transparent in the middle.
-          Only visible on mobile (md:hidden).
-        */}
-        <div className="absolute inset-x-0 bottom-0 z-10 h-[60%] bg-gradient-to-t from-black via-black/80 to-transparent backdrop-blur-[2px] md:hidden pointer-events-none"></div>
+    <header
+      className="relative flex min-h-dvh w-full flex-col overflow-hidden bg-black
+        md:flex-row md:bg-[linear-gradient(105deg,#e5e5e5_50%,black_50%)]"
+    >
+      {/* Photo — full-bleed on mobile (behind glass overlay), right half on desktop */}
+      <section className="absolute inset-0 z-0 flex items-center justify-center md:relative md:w-1/2 md:order-2">
+        <img
+          src={heroImg}
+          alt="Zohaib Munir"
+          className="h-full w-full object-cover object-center md:h-full md:object-cover"
+        />
+      </section>
 
-        {/* ✅ TEXT SECTION (z-20 ensures it stays above the glass and image) */}
-        <section className="relative z-20 flex w-full flex-col items-center text-center md:w-1/2 md:items-start md:text-left">
-          <h1 className="text-4xl font-bold text-white md:text-black md:text-5xl lg:text-7xl">
-            Hello, I'm <br />Zohaib Munir
-          </h1>    
-          
-          <h2 
-            className={`mt-4 text-2xl font-semibold text-gray-300 transition-opacity duration-500 ease-in-out md:text-3xl md:text-gray-600 lg:text-4xl ${
-              fade ? "opacity-100" : "opacity-0"
-            }`}
+      {/* Mobile glass overlay so text is readable over the photo */}
+      <div
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-[55%]
+          bg-gradient-to-t from-black via-black/85 to-transparent md:hidden"
+      />
+
+      {/* Text block — bottom-anchored over the glass on mobile, left panel on desktop */}
+      <section
+        className="absolute inset-x-0 bottom-0 z-20 flex flex-col items-start gap-4 px-6 pb-10
+          sm:px-8 sm:pb-14
+          md:static md:w-1/2 md:order-1 md:h-auto md:justify-center md:px-16 md:pb-0 md:text-black"
+      >
+        <p className="text-base text-gray-300 md:text-gray-600">Hi, I am</p>
+
+        <h1 className="text-3xl font-bold text-white sm:text-4xl md:text-5xl md:text-black lg:text-6xl">
+          Zohaib Munir
+        </h1>
+
+        <h2
+          className={`text-lg font-semibold text-gray-300 transition-opacity duration-500 ease-in-out
+            sm:text-xl md:text-2xl md:text-gray-600
+            ${fade ? 'opacity-100' : 'opacity-0'}`}
+        >
+          {HERO_TITLES[currentTitleIndex]}
+        </h2>
+
+        {/* Social icons — mirrors the Figma's icon row under the name */}
+        <div className="mt-2 flex items-center gap-3">
+          <a
+            href={SOCIAL_LINKS.email}
+            aria-label="Email"
+            className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 md:bg-black/10 md:text-black md:hover:bg-black/20"
           >
-            {HERO_TITLES[currentTitleIndex]}
-          </h2>
-        </section>
-
-        {/* ✅ IMAGE SECTION (z-0 sits in the background on mobile) */}
-        <section className="absolute inset-0 z-0 flex items-center justify-center md:relative md:w-1/2">
-          {/* We limit the height on mobile so it doesn't get stretched strangely, and let the background show */}
-          <div className="relative h-full w-full md:h-auto md:max-w-lg">
-            {/* Added mix-blend on mobile if you want the background gradient to peek through, otherwise object-cover */}
-            <img 
-              src="src/assets/images/hero.png" 
-              alt="Zohaib Munir - Hero" 
-              className="h-[80vh] w-full object-cover object-top md:h-full md:object-contain" 
-            />
-            {/* CTA Status Badge */}
-            <div className="absolute bottom-8 left-0 hidden w-full text-center md:block md:bottom-4">
-              <p className="inline-block rounded-full bg-black/60 px-6 py-2 text-sm font-semibold tracking-wide text-white shadow-lg backdrop-blur-sm">
-                Open to Full-Time Roles
-              </p>
-            </div>
-          </div>
-        </section>
-      </main>
-    </div>
-  )
-}
+            @
+          </a>
+          <a
+            href={SOCIAL_LINKS.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub"
+            className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 md:bg-black/10 md:text-black md:hover:bg-black/20"
+          >
+            ⌥
+          </a>
+          <a
+            href={SOCIAL_LINKS.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+            className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 md:bg-black/10 md:text-black md:hover:bg-black/20"
+          >
+            in
+          </a>
+        </div>
+      </section>
+    </header>
+  );
+};
 
 export default Hero;
