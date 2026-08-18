@@ -20,6 +20,7 @@ Styling	Tailwind CSS
 Forms	EmailJS (@emailjs/browser)
 Icons	Custom SVGs (skills), inline glyphs (social)
 Deployment	Vercel / Netlify (recommended)
+
 📁 Project Structure
 src/
 ├── assets/
@@ -108,5 +109,5 @@ This project is open for personal reference. Feel free to fork it for learning p
 
 📬 Contact
 Email: zohaibmughal0122@gmail.com
-LinkedIn: linkedin.com/in/zohaib-munirr
-GitHub: github.com/Zohaib-Mughal
+LinkedIn: www.linkedin.com/in/zohaib-munirr
+GitHub: www.github.com/Zohaib-Mughal
