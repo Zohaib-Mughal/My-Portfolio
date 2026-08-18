@@ -7,6 +7,7 @@ import Skills from './components/Skills'
 import Banner from './components/Banner'
 import Portfolio from './components/Portfolio'
 import Contact from './components/Contact'
+import Footer from './components/Footer'
 
 function App() {
 
@@ -23,6 +24,9 @@ function App() {
       <Portfolio />
       <Contact />
     </main>
+    <footer>
+      <Footer />
+    </footer>
     </>
   )
 }
