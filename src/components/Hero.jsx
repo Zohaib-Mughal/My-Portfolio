@@ -54,7 +54,7 @@ const Hero = () => {
       {/* Text block — bottom-anchored over the glass on mobile, left panel on desktop */}
       <section
         className="absolute inset-x-0 bottom-0 z-20 flex flex-row justify-between items-center gap-4 px-6 pb-10
-          sm:px-8 sm:pb-14
+          sm:px-8 sm:pb-14 md:flex-col
           md:static md:w-1/2 md:order-1 md:h-auto md:justify-center md:px-16 md:pb-0 md:text-black"
       >
         <div>
@@ -73,7 +73,7 @@ const Hero = () => {
         </h2>
         </div>
         {/* Social icons — mirrors the Figma's icon row under the name */}
-        <div className="mt-2 flex flex-col items-center gap-3">
+        <div className="mt-2 flex flex-col md:flex-row items-center md:gap-10 gap-4">
         <a
           href={SOCIAL_LINKS.email}
           aria-label="Email"

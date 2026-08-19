@@ -67,9 +67,6 @@ const Contact = () => {
       <p className="mx-auto mb-10 max-w-lg text-sm leading-relaxed text-gray-600 sm:text-base">
         Have a project in mind or just want to connect? Send a message and I'll get back to you as soon as I can.
       </p>
-
-      <Divider />
-
       <form onSubmit={handleSubmit} className="mx-auto flex max-w-md flex-col gap-8 text-left">
         <FormField label="Enter your name" name="name" value={form.name} onChange={handleChange} required />
         <FormField label="Enter your email" name="email" type="email" value={form.email} onChange={handleChange} required />
