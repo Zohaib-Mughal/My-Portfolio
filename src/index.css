@@ -1,14 +1,18 @@
 @import "tailwindcss";
 
-html {
-  scroll-behavior: smooth;
-  background-color: #e5e5e5;
-  font-family: 'Inter', sans-serif;
+@theme {
+  --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
 }
 
-@media (prefers-reduced-motion: no-preference) {
+@layer base {
   html {
-    scroll-behavior: smooth;
+    background-color: #f8fafc; /* Slightly softer modern background */
+    color: #0f172a; /* Slate 900 for crisp text */
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
   }
 }
-
