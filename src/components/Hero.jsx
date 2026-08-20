@@ -1,6 +1,17 @@
   import { motion } from 'framer-motion';
   // import BracketLink from './ui/BracketLink'; // Assuming you use this for your CTA
   import heroImage from '../assets/images/hero.png';
+  import { FaWhatsapp, FaGithub, FaLinkedinIn, FaEnvelope } from 'react-icons/fa';
+  import { SOCIAL_LINKS } from '../data/social';
+  
+  
+  // Mapping your exported object into an array for easy rendering
+  const SOCIALS = [
+    { name: 'GitHub', url: SOCIAL_LINKS.github, icon: <FaGithub size={22} />, glowClass: 'bg-black' },
+    { name: 'LinkedIn', url: SOCIAL_LINKS.linkedin, icon: <FaLinkedinIn size={22}/>, glowClass: 'bg-[#0A66C2]'  },
+    { name: 'WhatsApp', url: SOCIAL_LINKS.whatsapp, icon: <FaWhatsapp size={22}/>, glowClass: 'bg-[#25D366]'},
+    { name: 'Email', url: SOCIAL_LINKS.email, icon: <FaEnvelope size={22}/>, glowClass: 'bg-[#EA4335]' },
+  ];
 
   const Hero = () => {
     // Animation variants for staggered children
@@ -75,6 +86,28 @@
                 Contact Me
               </a>
             </motion.div>
+             <motion.div className="flex justify-center gap-17  mt-10">
+           {SOCIALS.map((social) => (
+            <a
+              key={social.name}
+              href={social.url}
+              target="_blank"
+              rel="noreferrer"
+              // We add 'relative' and 'p-2' to give the glow room to spread
+              className="group relative flex items-center justify-center p-2 text-gray-400 hover:text-gray-100 transition-colors" 
+            >
+              {/* 1. The Glow Background (Hidden by default, fades in on hover) */}
+              <div 
+                className={`absolute inset-0 -z-10 rounded-full opacity-0 blur-sm transition-opacity duration-300 group-hover:opacity-100 ${social.glowClass}`} 
+              />
+              
+              {/* 2. The Icon (Changes color to match the brand on hover) */}
+              <span className={`relative z-10 transition-colors duration-300 ${social.textClass}`}>
+                {social.icon}
+              </span>
+            </a>
+          ))}
+          </motion.div>
           </motion.div>
 
           {/* Right Column: Profile Image */}
@@ -100,6 +133,7 @@
                 className="h-full w-full object-cover"
               />
             </motion.div>
+           
 
             {/* Decorative background blur */}
             <div className="absolute top-1/2 left-1/2 -z-10 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gray-300/50 blur-3xl sm:h-96 sm:w-96" />
