@@ -12,7 +12,7 @@ export const PROJECTS = [
     image: biitConnectImage,
     demoUrl: null,
     repoUrl: null,
-    category: 'coded',
+    category: 'Full-Stack',
   },
   {
     id: 2,
@@ -24,7 +24,7 @@ export const PROJECTS = [
     image: expTracker,
     demoUrl: 'https://expense-tracker-app-pink-gamma.vercel.app/',
     repoUrl: null,
-    category: 'coded',
+    category: 'Full-Stack',
   },
   {
     id: 3,
@@ -36,6 +36,6 @@ export const PROJECTS = [
     image: userManager,
     demoUrl: 'https://user-task-manager-cyan.vercel.app/',
     repoUrl: null,
-    category: 'coded',
+    category: 'Frontend',
   },
 ];

@@ -1,95 +1,128 @@
-import { useState, useRef, useEffect } from 'react';
-import logo from '../../public/favicon.svg';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const NAV_LINKS = [
-  { id: 1, name: 'About me', href: '#about' },
-  { id: 2, name: 'Skills', href: '#skills' },
-  { id: 3, name: 'Projects', href: '#projects' },
+  { label: 'Home', href: '#home' },
+  { label: 'About', href: '#about' },
+  { label: 'Skills', href: '#skills' },
+  { label: 'Portfolio', href: '#portfolio' },
+  { label: 'Contact', href: '#contact' },
 ];
 
-function Navbar() {
-  const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const menuRef = useRef(null);
+const Navbar = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  // Track scroll position to trigger the glassmorphic background
   useEffect(() => {
-    function handleScroll() {
-      setScrolled(window.scrollY > 40);
-    }
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useEffect(() => {
-    function handleClickOutside(e) {
-      if (menuRef.current && !menuRef.current.contains(e.target)) {
-        setOpen(false);
-      }
+  // Custom smooth scroll handler
+  const handleScrollTo = (e, href) => {
+    e.preventDefault();
+    const target = document.querySelector(href);
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
+      setIsMobileMenuOpen(false); // Close mobile menu when a link is clicked
     }
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+  };
 
   return (
-    <nav
-      ref={menuRef}
-      className={`fixed top-0 z-50 flex w-full items-center justify-between px-6 py-4 text-white
-        transition-colors duration-300 md:px-20
-        ${scrolled ? 'bg-black shadow-lg' : 'bg-transparent'}`}
+    <motion.header
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      className={`fixed top-0 left-0 z-50 w-full transition-all duration-300 ${
+        isScrolled
+          ? 'bg-white/80 py-4 shadow-sm backdrop-blur-md' // Glassmorphic state
+          : 'bg-transparent py-6' // Initial transparent state
+      }`}
     >
-      <img src={logo} alt="Logo" className="h-8 w-8" />
-
-      <section className="hidden items-center space-x-10 md:flex">
-        {NAV_LINKS.map(link => (
-          <a key={link.id} href={link.href} className="p-1 hover:opacity-70 transition-opacity">
-            {link.name}
-          </a>
-        ))}
+      <div className="mx-auto flex max-w-8xl items-center justify-between px-6 sm:px-10 md:px-20">
+        
+        {/* Logo */}
         <a
-          href="#contact"
-          className="rounded-full bg-white px-5 py-2 text-xs font-bold tracking-wider text-black hover:bg-gray-200 transition-colors"
+          href="#home"
+          onClick={(e) => handleScrollTo(e, '#home')}
+          className="text-xl font-extrabold tracking-tighter text-black transition-opacity hover:opacity-70"
         >
-          CONTACT ME
+          Zohaib<span className="text-gray-400">.</span>
         </a>
-      </section>
 
-      <button
-        className="text-2xl md:hidden hover:opacity-70 transition-opacity"
-        aria-label="Toggle navigation"
-        aria-expanded={open}
-        onClick={() => setOpen(prev => !prev)}
-      >
-        {open ? '✕' : '☰'}
-      </button>
-
-      {open && (
-        <section className="absolute right-4 top-16 w-48 rounded-xl bg-white p-4 text-center text-black shadow-xl md:hidden">
-          <ul>
-            {NAV_LINKS.map(link => (
-              <li key={link.id} className="mb-2">
+        {/* Desktop Navigation */}
+        <nav className="hidden md:block">
+          <ul className="flex items-center gap-8">
+            {NAV_LINKS.map((link) => (
+              <li key={link.label}>
                 <a
                   href={link.href}
-                  onClick={() => setOpen(false)}
-                  className="block rounded-lg p-2 hover:bg-gray-100"
+                  onClick={(e) => handleScrollTo(e, link.href)}
+                  className="text-sm font-semibold tracking-wide text-gray-600 transition-colors hover:text-black"
                 >
-                  {link.name}
+                  {link.label}
                 </a>
               </li>
             ))}
-            <li>
-              <a
-                href="#contact"
-                onClick={() => setOpen(false)}
-                className="block rounded-full bg-black p-2 text-xs font-bold tracking-wider text-white hover:bg-gray-800"
-              >
-                CONTACT ME
-              </a>
-            </li>
           </ul>
-        </section>
-      )}
-    </nav>
+        </nav>
+
+        {/* Mobile Menu Toggle Button */}
+        <button
+          className="flex flex-col items-center justify-center gap-1.5 p-2 md:hidden"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label="Toggle Menu"
+        >
+          <span
+            className={`block h-0.5 w-6 bg-black transition-transform duration-300 ${
+              isMobileMenuOpen ? 'translate-y-2 rotate-45' : ''
+            }`}
+          />
+          <span
+            className={`block h-0.5 w-6 bg-black transition-opacity duration-300 ${
+              isMobileMenuOpen ? 'opacity-0' : ''
+            }`}
+          />
+          <span
+            className={`block h-0.5 w-6 bg-black transition-transform duration-300 ${
+              isMobileMenuOpen ? '-translate-y-2 -rotate-45' : ''
+            }`}
+          />
+        </button>
+      </div>
+
+      {/* Mobile Navigation Dropdown */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.nav
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+            className="absolute top-full left-0 w-full border-t border-gray-100 bg-white shadow-lg md:hidden"
+          >
+            <ul className="flex flex-col px-6 py-4 sm:px-10">
+              {NAV_LINKS.map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    onClick={(e) => handleScrollTo(e, link.href)}
+                    className="block border-b border-gray-50 py-4 text-sm font-semibold tracking-wide text-gray-600 transition-colors hover:text-black"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </motion.nav>
+        )}
+      </AnimatePresence>
+    </motion.header>
   );
-}
+};
 
 export default Navbar;

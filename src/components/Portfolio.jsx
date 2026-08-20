@@ -1,130 +1,131 @@
-import { useState } from 'react';
+import { motion } from 'framer-motion';
 import SectionLabel from './ui/SectionLabel';
 import { PROJECTS } from '../data/projects';
 
-const FILTERS = ['All', 'Coded'];
-
-const ProjectCard = ({ project }) => {
-  const [hovered, setHovered] = useState(false);
-
-  return (
-    <div
-      className="group relative aspect-[4/3] w-full cursor-pointer overflow-hidden bg-gradient-to-br from-gray-800 via-gray-900 to-black"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-    >
-      {/* Placeholder visual until real screenshots are added */}
-      {project.image ? (
-        <img
-          src={project.image}
-          alt={project.title}
-          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-        />
-      ) : (
-        <div className="flex h-full w-full items-center justify-center">
-          <span className="text-6xl font-black text-white/10 sm:text-7xl">
-            {project.title.charAt(0)}
-          </span>
-        </div>
-      )}
-
-      {/* Overlay — shown on hover (desktop) or always partially visible on mobile via tap */}
-      <div
-        className={`absolute inset-0 flex flex-col justify-end bg-black/80 p-5 text-white
-          transition-opacity duration-300
-          ${hovered ? 'opacity-100' : 'opacity-0'} md:opacity-0 md:group-hover:opacity-100`}
-      >
-        <p className="mb-1 text-xs italic text-gray-400">{project.subtitle}</p>
-        <h3 className="mb-2 text-lg font-bold sm:text-xl">{project.title}</h3>
-        <p className="mb-4 line-clamp-3 text-xs text-gray-300 sm:text-sm">
-          {project.description}
-        </p>
-
-        <div className="mb-3 flex flex-wrap gap-2">
-          {project.tech.map(t => (
-            <span
-              key={t}
-              className="rounded-full bg-white/10 px-2.5 py-1 text-[10px] font-medium tracking-wide"
-            >
-              {t}
-            </span>
-          ))}
-        </div>
-
-        <div className="flex items-center gap-3 text-xs font-bold tracking-widest">
-          {project.demoUrl && (
-            <a
-              href={project.demoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 hover:opacity-70"
-            >
-              <span className="h-3 w-px bg-white" />
-              DEMO
-            </a>
-          )}
-          {project.repoUrl && (
-            <>
-              <span className="h-3 w-px bg-white/40" />
-              <a
-                href={project.repoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 hover:opacity-70"
-              >
-                CODE
-                <span className="h-3 w-px bg-white" />
-              </a>
-            </>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-};
-
 const Portfolio = () => {
-  const [activeFilter, setActiveFilter] = useState('All');
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.2, delayChildren: 0.1 },
+    },
+  };
 
-  const filteredProjects =
-    activeFilter === 'All'
-      ? PROJECTS
-      : PROJECTS.filter(p => p.category === activeFilter.toLowerCase());
+  const cardVariants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+    },
+  };
 
   return (
-    <section id="projects" className="scroll-mt-20 w-full bg-black text-white">
-      <div className="px-6 py-16 text-center sm:px-10 md:px-20">
-        <SectionLabel>PORTFOLIO</SectionLabel>
-      </div>
+    <section
+      id="portfolio"
+      className="w-full bg-white px-6 py-20 sm:px-10 md:px-20 md:py-28"
+    >
+      <div className="mx-auto max-w-6xl">
+        <SectionLabel>SELECTED WORK</SectionLabel>
 
-      {/* Filter tabs */}
-      <div className="flex justify-center gap-8 border-b border-white/10 px-6 pb-4 sm:gap-12">
-        {FILTERS.map(filter => (
-          <button
-            key={filter}
-            onClick={() => setActiveFilter(filter)}
-            className={`pb-2 text-xs font-bold tracking-widest transition-colors sm:text-sm
-              ${
-                activeFilter === filter
-                  ? 'border-b-2 border-white text-white'
-                  : 'text-gray-500 hover:text-gray-300'
-              }`}
-          >
-            {filter.toUpperCase()}
-          </button>
-        ))}
-      </div>
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-100px' }}
+          className="mt-12 grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16"
+        >
+          {PROJECTS.map((project) => (
+            <motion.div
+              key={project.id}
+              variants={cardVariants}
+              className="group flex flex-col"
+            >
+              {/* Image Container with Hover Scale */}
+              <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-gray-100 shadow-sm transition-shadow duration-300 group-hover:shadow-xl">
+                
+                {/* Category Badge */}
+                <div className="absolute right-4 top-4 z-10 rounded-full bg-white/90 px-3 py-1.5 text-xs font-bold tracking-wider text-black backdrop-blur-md shadow-sm uppercase">
+                  {project.category}
+                </div>
 
-      {/* Grid */}
-      <div className="grid grid-cols-1 gap-0.5 bg-white/10 sm:grid-cols-2 md:grid-cols-3">
-        {filteredProjects.map(project => (
-          <ProjectCard key={project.id} project={project} />
-        ))}
-      </div>
+                {/* Project Image */}
+                <div className="absolute inset-0 flex items-center justify-center bg-gray-200">
+                  {project.image ? (
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    />
+                  ) : (
+                    <span className="text-gray-400 text-sm font-medium">Image Preview</span>
+                  )}
+                </div>
 
-      <p className="bg-[#1a1a1a] py-6 text-center text-sm font-medium tracking-wide text-gray-400">
-        And many more to come!
-      </p>
+                {/* Hover Overlay with Links (Only shows if URLs exist) */}
+                <div className="absolute inset-0 flex items-center justify-center gap-4 bg-black/60 opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100">
+                  {project.repoUrl && (
+                    <a
+                      href={project.repoUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="translate-y-4 rounded-full bg-white px-6 py-2.5 text-sm font-semibold text-black opacity-0 transition-all duration-300 hover:scale-105 hover:bg-gray-100 group-hover:translate-y-0 group-hover:opacity-100"
+                    >
+                      Code
+                    </a>
+                  )}
+                  {project.demoUrl && (
+                    <a
+                      href={project.demoUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="translate-y-4 rounded-full bg-black border border-white/20 px-6 py-2.5 text-sm font-semibold text-white opacity-0 transition-all duration-300 delay-75 hover:scale-105 hover:bg-gray-900 group-hover:translate-y-0 group-hover:opacity-100"
+                    >
+                      Live Demo
+                    </a>
+                  )}
+                  {/* Fallback if no links exist, show a coming soon or keep it clean */}
+                  {!project.repoUrl && !project.demoUrl && (
+                    <span className="translate-y-4 rounded-full bg-white/10 px-6 py-2.5 text-sm font-semibold text-white opacity-0 backdrop-blur-md transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+                      Private Repository
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              {/* Project Info */}
+              <div className="mt-6 flex flex-col">
+                <h3 className="text-2xl font-bold tracking-tight text-gray-900 transition-colors group-hover:text-black">
+                  {project.title}
+                </h3>
+                
+                {/* Subtitle Added Here */}
+                {project.subtitle && (
+                  <p className="mt-1 text-sm font-semibold text-gray-500">
+                    {project.subtitle}
+                  </p>
+                )}
+
+                <p className="mt-3 line-clamp-3 leading-relaxed text-gray-600">
+                  {project.description}
+                </p>
+
+                {/* Tech Stack Pills */}
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {project.tech.map((tech, index) => (
+                    <span
+                      key={index}
+                      className="rounded-md border border-gray-200 bg-gray-50 px-2.5 py-1 text-xs font-semibold tracking-wide text-gray-600"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
     </section>
   );
 };

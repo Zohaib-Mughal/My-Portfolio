@@ -79,7 +79,7 @@ const About = () => {
                 CS Degree Completed
               </p>
               <p className="mt-2 text-sm text-gray-600">
-                Barani Institute of Information Technology
+                Barani Institute of Information Technology, Rawalpindi
               </p>
             </motion.div>
 
@@ -102,12 +102,24 @@ const About = () => {
               variants={itemVariants} 
               className="group flex flex-col justify-center rounded-2xl border border-gray-100 bg-gray-50 p-6 shadow-sm transition-all hover:border-black hover:bg-white hover:shadow-md sm:col-span-2"
             >
-              <h4 className="text-xl font-bold text-black">The Core Stack</h4>
-              <p className="mt-3 leading-relaxed text-gray-600">
-                <span className="font-semibold text-gray-900">Frontend:</span> React.js, React Native, Tailwind CSS <br />
-                <span className="font-semibold text-gray-900">Backend:</span> Node.js, Express.js <br />
-                <span className="font-semibold text-gray-900">Database & Tools:</span> SQL Server, Git, Postman, Photoshop
-              </p>
+             <h4 className="text-xl font-bold text-black">The Core Stack</h4>
+
+<p className="mt-3 leading-relaxed text-gray-600">
+  <span className="font-semibold text-gray-900">Frontend:</span>{" "}
+  React.js, React Native, HTML5, CSS3, Tailwind CSS, React Router
+  <br />
+
+  <span className="font-semibold text-gray-900">Backend:</span>{" "}
+  Node.js, Express.js, REST APIs, JWT Authentication, Socket.io
+  <br />
+
+  <span className="font-semibold text-gray-900">Database:</span>{" "}
+  MongoDB, SQL Server
+  <br />
+
+  <span className="font-semibold text-gray-900">Tools:</span>{" "}
+  Git, GitHub, Postman, VS Code
+</p>
             </motion.div>
           </motion.div>
 
