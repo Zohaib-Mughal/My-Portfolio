@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import emailjs from '@emailjs/browser';
 import SectionLabel from './ui/SectionLabel';
-import Divider from './ui/Divider';
 
 const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
 const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
@@ -12,17 +11,20 @@ const initialForm = { name: '', email: '', phone: '', message: '' };
 const FormField = ({ label, name, type = 'text', value, onChange, required, textarea }) => {
   const Tag = textarea ? 'textarea' : 'input';
   return (
-    <div className="w-full">
+    <div className="flex w-full flex-col gap-1.5">
+      <label htmlFor={name} className="text-sm font-medium text-gray-700">
+        {label} {required && <span className="text-red-500">*</span>}
+      </label>
       <Tag
+        id={name}
         type={!textarea ? type : undefined}
         name={name}
         value={value}
         onChange={onChange}
         required={required}
         rows={textarea ? 5 : undefined}
-        placeholder={`${label}${required ? '*' : ''}`.toUpperCase()}
-        className="w-full resize-none border-b-2 border-black bg-transparent py-2 text-sm
-          tracking-wide placeholder:text-gray-400 focus:outline-none focus:border-gray-600"
+        placeholder={`Enter your ${label.toLowerCase()}`}
+        className="w-full rounded-xl border border-gray-300 bg-white/80 px-4 py-3 text-sm text-gray-900 shadow-sm transition-all placeholder:text-gray-400 focus:border-black focus:bg-white focus:outline-none focus:ring-1 focus:ring-black"
       />
     </div>
   );
@@ -32,25 +34,26 @@ const Contact = () => {
   const [form, setForm] = useState(initialForm);
   const [status, setStatus] = useState('idle'); // idle | sending | success | error
 
-  const handleChange = e => {
-    setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  const handleChange = (e) => {
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (!form.name || !form.email || !form.message) return;
 
     setStatus('sending');
     try {
       await emailjs.send(
         EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID,
         form,
         EMAILJS_PUBLIC_KEY
       );
       setStatus('success');
       setForm(initialForm);
+      
+      // Reset status after a few seconds
+      setTimeout(() => setStatus('idle'), 5000);
     } catch (err) {
       console.error('EmailJS error:', err);
       setStatus('error');
@@ -62,42 +65,66 @@ const Contact = () => {
       id="contact"
       className="w-full bg-[#e5e5e5] px-6 py-20 text-center text-black sm:px-10 md:px-20 md:py-28"
     >
-      <SectionLabel>CONTACT</SectionLabel>
+      <div className="mx-auto max-w-2xl">
+        <SectionLabel>CONTACT</SectionLabel>
 
-      <p className="mx-auto mb-10 max-w-lg text-sm leading-relaxed text-gray-600 sm:text-base">
-        Have a project in mind or just want to connect? Send a message and I'll get back to you as soon as I can.
-      </p>
-      <form onSubmit={handleSubmit} className="mx-auto flex max-w-md flex-col gap-8 text-left">
-        <FormField label="Enter your name" name="name" value={form.name} onChange={handleChange} required />
-        <FormField label="Enter your email" name="email" type="email" value={form.email} onChange={handleChange} required />
-        <FormField label="Phone number" name="phone" type="tel" value={form.phone} onChange={handleChange} />
-        <FormField label="Your message" name="message" value={form.message} onChange={handleChange} required textarea />
+        <h2 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+          Let's work together
+        </h2>
+        <p className="mx-auto mt-4 mb-10 max-w-lg text-sm leading-relaxed text-gray-600 sm:text-base">
+          Have a project in mind or just want to connect? Send a message and I'll get back to you as soon as I can.
+        </p>
 
-        <button
-          type="submit"
-          disabled={status === 'sending'}
-          className="mx-auto flex items-center gap-3 text-sm font-bold tracking-widest
-            hover:opacity-60 transition-opacity disabled:opacity-40"
-        >
-          <span className="h-4 w-px bg-black" />
-          {status === 'sending' ? 'SENDING…' : 'SUBMIT'}
-          <span className="h-4 w-px bg-black" />
-        </button>
+        <form onSubmit={handleSubmit} className="text-left">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+            <FormField label="Name" name="name" value={form.name} onChange={handleChange} required />
+            <FormField label="Email" name="email" type="email" value={form.email} onChange={handleChange} required />
+          </div>
+          <div className="mt-6">
+            <FormField label="Phone Number" name="phone" type="tel" value={form.phone} onChange={handleChange} />
+          </div>
+          <div className="mt-6">
+            <FormField label="Message" name="message" value={form.message} onChange={handleChange} required textarea />
+          </div>
 
-        {status === 'success' && (
-          <p className="text-center text-sm font-medium text-green-700">
-            Message sent — thanks for reaching out!
-          </p>
-        )}
-        {status === 'error' && (
-          <p className="text-center text-sm font-medium text-red-600">
-            Something went wrong. Try again, or email me directly at{' '}
-            <a href="mailto:zohaibmughal0122@gmail.com" className="underline">
-              zohaibmughal0122@gmail.com
-            </a>.
-          </p>
-        )}
-      </form>
+          <div className="mt-8 flex flex-col items-center justify-between gap-4 sm:flex-row">
+            <button
+              type="submit"
+              disabled={status === 'sending' || status === 'success'}
+              className="flex w-full items-center justify-center gap-2 rounded-xl bg-black px-8 py-3.5 text-sm font-semibold text-white transition-all hover:bg-gray-800 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
+            >
+              {status === 'sending' ? (
+                <>
+                  <svg className="h-4 w-4 animate-spin text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  Sending...
+                </>
+              ) : status === 'success' ? (
+                'Sent!'
+              ) : (
+                'Send Message'
+              )}
+            </button>
+
+            {/* Alert Messages */}
+            {status === 'success' && (
+              <p className="w-full rounded-lg bg-green-50 px-4 py-3 text-sm text-green-800 ring-1 ring-green-200 sm:w-auto">
+                Message sent successfully!
+              </p>
+            )}
+            {status === 'error' && (
+              <p className="w-full rounded-lg bg-red-50 px-4 py-3 text-sm text-red-800 ring-1 ring-red-200 sm:w-auto">
+                Something went wrong. Email me at{' '}
+                <a href="mailto:zohaibmughal0122@gmail.com" className="font-medium underline hover:text-red-900">
+                  zohaibmughal0122@gmail.com
+                </a>
+              </p>
+            )}
+          </div>
+        </form>
+      </div>
     </section>
   );
 };
