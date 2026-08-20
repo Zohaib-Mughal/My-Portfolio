@@ -1,12 +1,14 @@
 import { motion } from 'framer-motion';
 import { SOCIAL_LINKS } from '../data/social';
+import { FaWhatsapp, FaGithub, FaLinkedinIn, FaEnvelope } from 'react-icons/fa';
+
 
 // Mapping your exported object into an array for easy rendering
 const SOCIALS = [
-  { name: 'GitHub', url: SOCIAL_LINKS.github },
-  { name: 'LinkedIn', url: SOCIAL_LINKS.linkedin },
-  { name: 'WhatsApp', url: SOCIAL_LINKS.whatsapp },
-  { name: 'Email', url: SOCIAL_LINKS.email },
+  { name: 'GitHub', url: SOCIAL_LINKS.github, icon: <FaGithub /> },
+  { name: 'LinkedIn', url: SOCIAL_LINKS.linkedin, icon: <FaLinkedinIn /> },
+  { name: 'WhatsApp', url: SOCIAL_LINKS.whatsapp, icon: <FaWhatsapp /> },
+  { name: 'Email', url: SOCIAL_LINKS.email, icon: <FaEnvelope /> },
 ];
 
 const Footer = () => {
@@ -46,6 +48,7 @@ const Footer = () => {
                 rel="noreferrer"
                 className="group flex items-center gap-1.5 text-sm font-semibold tracking-wide text-gray-300 transition-colors hover:text-white"
               >
+                {social.icon}
                 {social.name}
                 
                 {/* Animated Arrow SVG */}

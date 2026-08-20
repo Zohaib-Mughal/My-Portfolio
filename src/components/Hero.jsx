@@ -92,7 +92,7 @@
                 repeat: Infinity, 
                 ease: "easeInOut" 
               }}
-              className="relative z-10 aspect-square w-64 overflow-hidden rounded-full border-4 border-white bg-gray-100 shadow-2xl sm:w-80 lg:w-full lg:max-w-[400px]"
+              className="relative z-10 aspect-square w-64 overflow-hidden rounded-full border-4 border-white bg-gray-200 shadow-2xl sm:w-80 lg:w-full lg:max-w-[400px]"
             >
               <img 
                 src={heroImage} 
