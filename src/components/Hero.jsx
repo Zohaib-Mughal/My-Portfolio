@@ -86,7 +86,7 @@
                 Contact Me
               </a>
             </motion.div>
-             <motion.div className="flex justify-center gap-17  mt-10">
+             <motion.div className="flex justify-center mt-10">
            {SOCIALS.map((social) => (
             <a
               key={social.name}
@@ -94,7 +94,7 @@
               target="_blank"
               rel="noreferrer"
               // We add 'relative' and 'p-2' to give the glow room to spread
-              className="group relative flex items-center justify-center p-2 text-gray-400 hover:text-gray-100 transition-colors" 
+              className="group relative flex items-center justify-center p-8 text-gray-400 hover:text-gray-100 transition-colors" 
             >
               {/* 1. The Glow Background (Hidden by default, fades in on hover) */}
               <div 
