@@ -75,7 +75,7 @@ const Skills = () => {
                     className="group flex cursor-default items-center gap-3 rounded-xl border border-gray-200 bg-white px-4 py-3 shadow-sm transition-all hover:border-black hover:shadow-md"
                   >
                     {/* Icon Container */}
-                    <div className="flex h-6 w-6 items-center justify-center grayscale transition-all duration-300 group-hover:grayscale-0">
+                    <div className="flex h-6 w-6 items-center justify-center  transition-all duration-300">
                       <img 
                         src={skill.icon} 
                         alt={`${skill.name} icon`} 

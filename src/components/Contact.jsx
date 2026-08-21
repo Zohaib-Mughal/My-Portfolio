@@ -155,6 +155,7 @@ const Contact = () => {
               type="tel"
               value={form.phone}
               onChange={handleChange}
+              required
             />
           </div>
 
