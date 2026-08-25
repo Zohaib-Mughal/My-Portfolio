@@ -1,6 +1,8 @@
 import biitConnectImage from '../assets/project/biitconnect.png';
 import expTracker from '../assets/project/expensetracker.png';
 import userManager from '../assets/project/usermang.png';
+import weatherApp from '../assets/project/weatherapp.png';
+
 export const PROJECTS = [
   {
     id: 1,
@@ -35,6 +37,18 @@ export const PROJECTS = [
     tech: ['React.js', 'Tailwind CSS v4', 'React Router', 'Node.js'],
     image: userManager,
     demoUrl: 'https://user-task-manager-cyan.vercel.app/',
+    repoUrl: null,
+    category: 'Frontend',
+  },
+  {
+    id: 4,
+    title: 'Weather',
+    subtitle: 'Weather Forecast Web App',
+    description:
+      'A weather app with current conditions, a 24-hour forecast graph, and a 5-day outlook, driven by the OpenWeatherMap API. Features debounced city search with geocoding autocomplete, browser geolocation with reverse geocoding, and a weather-themed UI that dynamically shifts its background and icon set based on live conditions and time of day.',
+    tech: ['React.js', 'Vite', 'Tailwind CSS', 'OpenWeatherMap API'],
+    image: weatherApp,
+    demoUrl: 'https://my-weather-app-31.vercel.app/',
     repoUrl: null,
     category: 'Frontend',
   },
