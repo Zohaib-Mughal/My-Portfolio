@@ -33,7 +33,7 @@ const Banner = () => {
         viewport={{ once: true, margin: '-100px' }}
         transition={{ duration: 1.2, ease: 'easeOut' }}
         aria-hidden="true"
-        className="pointer-events-none absolute -right-10 top-1/2 -translate-y-1/2 select-none text-[12rem] font-black leading-none text-white-[0.03] sm:text-[16rem] md:text-[24rem]"
+        className="pointer-events-none absolute -right-10 top-1/2 -translate-y-1/2 select-none text-[12rem] font-black leading-none text-gray-800 sm:text-[16rem] md:text-[24rem]"
       >
         ZM
       </motion.span>

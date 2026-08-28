@@ -1,6 +1,6 @@
   import { motion } from 'framer-motion';
   // import BracketLink from './ui/BracketLink'; // Assuming you use this for your CTA
-  import heroImage from '../assets/images/hero.png';
+  import heroImage from '../assets/images/hero2.jpeg';
   import { FaWhatsapp, FaGithub, FaLinkedinIn, FaEnvelope } from 'react-icons/fa';
   import { SOCIAL_LINKS } from '../data/social';
   
@@ -20,8 +20,8 @@
       visible: {
         opacity: 1,
         transition: {
-          staggerChildren: 0.2, // Delay between each element appearing
-          delayChildren: 0.1,
+          staggerChildren: 0.5, // Delay between each element appearing
+          delayChildren: 1,
         },
       },
     };
